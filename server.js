@@ -59,9 +59,11 @@ function processPostback(event) {
       }
       var message = greeting + "Politica e arta de a sta la pândă.";
       sendMessage(senderId, {text: message});
+      sendMessage(senderId, {text: message});
     });
   }
   else {
+    sendMessage(senderId, {text: "Taci, fă, analfabeto, că vorbesc nişte intelectuali!"});
     sendMessage(senderId, {text: "Taci, fă, analfabeto, că vorbesc nişte intelectuali!"});
   }
 }
