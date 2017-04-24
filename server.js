@@ -55,11 +55,14 @@ function processPostback(event) {
       } else {
         var bodyObj = JSON.parse(body);
         name = bodyObj.first_name;
-        greeting = "Salut " + name + ". ";
+        greeting = "Salutări " + name + ". ";
       }
-      var message = greeting + "Politica e arta de a sta la pândă.Politica e arta de a sta la pândă.";
+      var message = greeting + "Politica e arta de a sta la pândă.";
       sendMessage(senderId, {text: message});
     });
+  }
+  else {
+    sendMessage(senderId, "Taci, fă, analfabeto, că vorbesc nişte intelectuali!");
   }
 }
 
