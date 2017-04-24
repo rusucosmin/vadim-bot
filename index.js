@@ -6,9 +6,9 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
-app.listen((preocess.env.PORT || 5000));
+app.listen((process.env.PORT || 5000));
 
-app.get("/", function(req, rest) {
+app.get("/", function(req, res) {
   res.send("Deployed!");
 });
 
