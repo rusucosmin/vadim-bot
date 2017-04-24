@@ -28,7 +28,7 @@ app.post("/webhook", function(req, res) {
     req.body.entry.forEach(function(entry) {
       entry.messaging.forEach(function(event) {
         if(event.postback) {
-          processPostBack(event);
+          processPostback(event);
         }
      });
     });
