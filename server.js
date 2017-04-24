@@ -61,7 +61,6 @@ function processPostback(event) {
       }
       var message = greeting + "Politica e arta de a sta la pândă.";
       sendMessage(senderId, {text: message});
-      sendMessage(senderId, {text: message});
     });
   }
 }
