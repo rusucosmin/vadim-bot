@@ -1,6 +1,10 @@
 var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
+var fs = require('fs');
+
+var quotes = fs.readFileSync('vadim.txt', 'utf8').split("\n");
+console.log("Loaded:\n" + quotes.join("\n"));
 
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
@@ -73,7 +77,8 @@ function processMessage(event) {
     console.log("Received message from senderId: " + senderId);
     console.log("Message is: " + JSON.stringify(message));
 
-    sendMessage(senderId, {text: "Taci, fă, analfabeto, că vorbesc nişte intelectuali!"});
+    var vadim = quotes[Math.floor(Math.random()*quotes.length)];
+    sendMessage(senderId, {text: vadim});
   }
 }
 
