@@ -1,0 +1,30 @@
+{
+  "name": "vadim-bot",
+  "version": "1.0.0",
+  "description": "A simple Bot that sends random Vadim Tudor quotes. [RIP]",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rusucosmin/vadim-bot.git"
+  },
+  "keywords": [
+    "vadim",
+    "bot",
+    "messenger"
+  ],
+  "author": "Cosmin Rusu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rusucosmin/vadim-bot/issues"
+  },
+  "homepage": "https://github.com/rusucosmin/vadim-bot#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.6",
+    "request": "^2.81.0"
+  }
+}
