@@ -62,7 +62,7 @@ function processPostback(event) {
     });
   }
   else {
-    sendMessage(senderId, "Taci, fă, analfabeto, că vorbesc nişte intelectuali!");
+    sendMessage(senderId, {text: "Taci, fă, analfabeto, că vorbesc nişte intelectuali!"});
   }
 }
 
