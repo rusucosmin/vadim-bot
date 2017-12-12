@@ -28,6 +28,8 @@ app.get("/webhook", function(req, res) {
 });
 
 app.post("/webhook", function(req, res) {
+  console.log("Started request")
+  console.log(req)
   if(req.body.object === "page") {
     req.body.entry.forEach(function(entry) {
       entry.messaging.forEach(function(event) {
@@ -45,6 +47,8 @@ app.post("/webhook", function(req, res) {
 });
 
 function processReferral(event) {
+  console.log("processReferral");
+  console.log(event)
   var senderId = event.sender.id;
   var payload = event.postback.payload;
 
@@ -56,6 +60,9 @@ function processReferral(event) {
 }
 
 function processPostback(event) {
+  console.log("processPostback");
+  console.log(event)
+
   var senderId = event.sender.id;
   var payload = event.postback.payload;
 
@@ -91,6 +98,9 @@ function processPostback(event) {
 }
 
 function processMessage(event) {
+  console.log("processMessage");
+  console.log(event)
+
   if(!event.message.is_echo) {
     var message = event.message;
     var senderId = event.sender.id;
@@ -104,6 +114,8 @@ function processMessage(event) {
 }
 
 function sendMessage(recipientId, message) {
+  console.log("sending Message ")
+  console.log(message)
   request({
     url: "https://graph.facebook.com/v2.6/me/messages",
     qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
