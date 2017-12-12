@@ -46,7 +46,7 @@ offers = {
     type: "buritto with every ingredient you can ever think",
     price: "very cheap, bug high quality",
     message: "There is nothing more that should be said.",
-    deeplink: "https://nameless-basin-57929.herokuapp.com/party/352"
+    deeplink: "https://nameless-basin-57929.herokuapp.com/party/3521"
   }
 }
 
