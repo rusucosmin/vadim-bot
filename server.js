@@ -147,16 +147,22 @@ function processReferral(event) {
         console.log("response undefined")
       }
       var offer = JSON.parse(body)
-      sendMessage(senderId, {
-        text: "Our offer today is:\n"
-            + "Offer: " + offer.offer + "\n"
-            + "Type: " + offer.type+ "\n"
-            + "Price: " + offer.price + "\n"
-            + "Description: " + offer.message + "\n"
-      })
-      sendMessage(senderId, {
-        text: "Buy this offer here: " + offer.deeplink
-      })
+      if (offer) {
+        sendMessage(senderId, {
+          text: "Our offer today is:\n"
+              + "Offer: " + offer.offer + "\n"
+              + "Type: " + offer.type+ "\n"
+              + "Price: " + offer.price + "\n"
+              + "Description: " + offer.message + "\n"
+        })
+        sendMessage(senderId, {
+          text: "Buy this offer here: " + offer.deeplink
+        })
+      } else {
+        sendMessage(senderId, {
+          text: "There is no offer here, today :(!"
+        })
+      }
     })
   } else {
     sendMessage(senderId, {text: "Hi there, stranger"})
