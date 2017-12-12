@@ -23,13 +23,15 @@ offers = {
     offer: "pizza",
     type: "big pizza",
     price: "very cheap, bug high quality",
-    message: "You should try our pizza, best pizza in town. Only today at a great deal 50% off on two ordered"
+    message: "You should try our pizza, best pizza in town. Only today at a great deal 50% off on two ordered",
+    deeplink: "https://nameless-basin-57929.herokuapp.com/parties/3521"
   }, "loomni": {
     ref: "loomni",
     offer: "buritto",
     type: "buritto with every ingredient you can ever think",
     price: "very cheap, bug high quality",
-    message: "There is nothing more that should be said."
+    message: "There is nothing more that should be said.",
+    deeplink: "https://nameless-basin-57929.herokuapp.com/parties/352"
   }
 }
 
@@ -55,12 +57,14 @@ app.post("/offers", function(req, res) {
   type = req.body.type
   price = req.body.price
   message = req.body.message
+  deeplink = req.body.deeplink
   offers[ref] = {
     ref,
     offer,
     type,
     price,
-    message
+    message,
+    deeplink
   }
   res.send(offers)
 })
@@ -134,6 +138,9 @@ function processReferral(event) {
             + offer.price + "\n"
             + offer.message + "\n"
             + offer.price + "\n"
+      })
+      sendMessage(senderId, {
+        text: "Buy this offer here: " + offer.deepling
       })
     })
   } else {
