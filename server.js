@@ -98,22 +98,21 @@ function processReferral(event) {
   var senderId = event.sender.id;
 
   if(event.referral.source == "MESSENGER_CODE") {
-    sendMessage(senderId, {text: "Hi there, it looks like you are at " + event.referral.ref})
-    sendMessage(senderId, {text: "Here are our offers today"})
+    sendMessage(senderId, {text: "Hi there, it looks like you are at <" + event.referral.ref + ">!"})
+    sendMessage(senderId, {text: "Here are our offers today:"})
     request({
       url: "/offers?ref=" + event.referral.ref,
       method: "GET"
     }, function(err, response, body) {
       var offer = JSON.parse(body)
       sendMessage(senderId, {
-        text: "Our offfer today is:\n"
+        text: "Our offer today is:\n"
             + offer.offer + "\n"
             + offer.price + "\n"
             + offer.message + "\n"
             + offer.price + "\n"
       })
     })
-    sendMessage(senderId,  {text: "Here are our offers today"})
   } else {
     sendMessage(senderId, {text: "Hi there, stranger"})
   }
