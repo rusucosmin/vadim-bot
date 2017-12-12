@@ -149,10 +149,10 @@ function processReferral(event) {
       var offer = JSON.parse(body)
       sendMessage(senderId, {
         text: "Our offer today is:\n"
-            + offer.offer + "\n"
-            + offer.price + "\n"
-            + offer.message + "\n"
-            + offer.price + "\n"
+            + "Offer: " + offer.offer + "\n"
+            + "Type: " + offer.type+ "\n"
+            + "Price: " + offer.price + "\n"
+            + "Description: " + offer.message + "\n"
       })
       sendMessage(senderId, {
         text: "Buy this offer here: " + offer.deeplink
