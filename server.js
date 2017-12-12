@@ -50,7 +50,6 @@ function processReferral(event) {
   console.log("processReferral");
   console.log(event)
   var senderId = event.sender.id;
-  var payload = event.postback.payload;
 
   if(event.referral.source == "MESSENGER_CODE") {
     sendMessage(senderId, {text: "Hi there, it looks like you are at" + event.referral.ref})
