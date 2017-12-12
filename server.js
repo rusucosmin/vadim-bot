@@ -17,6 +17,21 @@ app.get("/", function(req, res) {
   res.send("Deployed!");
 });
 
+app.get("/code", function(req, res) {
+  request({
+    url: "https://graph.facebook.com/v2.6/me/messenger_codes?access_token=EAAaQXq6s9WkBAFpgv3IZBrPqPBFkc23ZB7EgZAiij31HSxLfuv6q1aT50yiy1FfVV2NefmXdMuHC52HoCZA83iylr3t1pLfk6ZCkezHE9ZAe2wuqT4yyJC6sxcjLguOyoXxDoMvx77NB13ZBZBfZBeXWiB5ZA5XUJoBe4LTDDBqZAqfuQZDZD",
+    method: "POST",
+    json: {
+      type: "standard",
+      data: {
+        "ref": "\"" + req.query.ref + "\""
+      },
+      image_size: 500
+    }}, function(err, response, body) {
+      res.send(body);
+    });
+})
+
 offers = {
   "economica2": {
     ref: "economica2",
