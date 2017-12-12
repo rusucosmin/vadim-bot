@@ -29,7 +29,6 @@ app.get("/webhook", function(req, res) {
 
 app.post("/webhook", function(req, res) {
   console.log("Started request")
-  console.log(req)
   if(req.body.object === "page") {
     req.body.entry.forEach(function(entry) {
       entry.messaging.forEach(function(event) {
@@ -52,7 +51,7 @@ function processReferral(event) {
   var senderId = event.sender.id;
 
   if(event.referral.source == "MESSENGER_CODE") {
-    sendMessage(senderId, {text: "Hi there, it looks like you are at" + event.referral.ref})
+    sendMessage(senderId, {text: "Hi there, it looks like you are at " + event.referral.ref})
   } else {
     sendMessage(senderId, {text: "Hi there, stranger"})
   }
