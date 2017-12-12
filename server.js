@@ -16,6 +16,53 @@ app.get("/", function(req, res) {
   res.send("Deployed!");
 });
 
+offers = {
+  "economica2": {
+    ref: "economica2",
+    offer: "pizza",
+    type: "big pizza",
+    price: "very cheap, bug high quality",
+    message: "You should try our pizza, best pizza in town. Only today at a great deal 50% off on two ordered"
+  }, "loomni": {
+    ref: "loomni",
+    offer: "buritto",
+    type: "buritto with every ingredient you can ever think",
+    price: "very cheap, bug high quality",
+    message: "There is nothing more that should be said."
+  }
+}
+
+app.get("/offers", function(req, res) {
+  ref = req.query.ref
+  console.log(req.query)
+  offer = offers[ref]
+  console.log(ref)
+  if (!offer) {
+    offer = {
+      ref,
+      error: "unrecognised ref"
+    }
+  }
+  res.send(offer)
+})
+
+app.post("/offers", function(req, res) {
+  console.log("post offer")
+  console.log(req.body)
+  ref = req.body.ref
+  offer = req.body.offer
+  type = req.body.type
+  price = req.body.price
+  message = req.body.message
+  offers[ref] = {
+    ref,
+    offer,
+    type,
+    price,
+    message
+  }
+  res.send(offers)
+})
 
 app.get("/webhook", function(req, res) {
   if(req.query["hub.verify_token"] == process.env.VERIFICATION_TOKEN) {
@@ -52,6 +99,21 @@ function processReferral(event) {
 
   if(event.referral.source == "MESSENGER_CODE") {
     sendMessage(senderId, {text: "Hi there, it looks like you are at " + event.referral.ref})
+    sendMessage(senderId, {text: "Here are our offers today"})
+    request({
+      url: "/offers?ref=" + event.referral.ref,
+      method: "GET"
+    }, function(err, response, body) {
+      var offer = JSON.parse(body)
+      sendMessage(senderId, {
+        text: "Our offfer today is:\n"
+            + offer.offer + "\n"
+            + offer.price + "\n"
+            + offer.message + "\n"
+            + offer.price + "\n"
+      })
+    })
+    sendMessage(senderId,  {text: "Here are our offers today"})
   } else {
     sendMessage(senderId, {text: "Hi there, stranger"})
   }
