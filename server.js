@@ -22,7 +22,7 @@ app.get("/webhook", function(req, res) {
     console.log("Verified webhook");
     res.status(200).send(req.query["hub.challenge"]);
   } else {
-    console.error("Verification failed. The tokens do not mathc");
+    console.error("Verification failed. The tokens do not match");
     res.sendStatus(403);
   }
 });
@@ -35,12 +35,25 @@ app.post("/webhook", function(req, res) {
           processPostback(event);
         } else if(event.message) {
           processMessage(event);
+        } else if(event.referral) {
+          processReferral(event);
         }
      });
     });
     res.sendStatus(200);
   }
 });
+
+function processReferral(event) {
+  var senderId = event.sender.id;
+  var payload = event.postback.payload;
+
+  if(event.referral.source == "MESSENGER_CODE") {
+    sendMessage(senderId, {text: "Hi there, it looks like you are at" + event.referral.ref})
+  } else {
+    sendMessage(senderId, {text: "Hi there, stranger"})
+  }
+}
 
 function processPostback(event) {
   var senderId = event.sender.id;
@@ -66,6 +79,14 @@ function processPostback(event) {
       var message = greeting + "Politica e arta de a sta la pândă.";
       sendMessage(senderId, {text: message});
     });
+  } else if(event.postback.referral) {
+    var ref = event.postback.referral
+    // first time entering
+    if (ref.source === "MESSENGER_CODE") {
+      sendMessage(senderId, {text: "hi there. It looks like you were referenced by " + ref.ref})
+    } else {
+      sendMessage(senderId, {text: "oh, you didn't come from parametric code. Nice to meet you!"})
+    }
   }
 }
 
