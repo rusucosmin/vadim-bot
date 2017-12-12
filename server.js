@@ -140,7 +140,7 @@ function processReferral(event) {
             + offer.price + "\n"
       })
       sendMessage(senderId, {
-        text: "Buy this offer here: " + offer.deepling
+        text: "Buy this offer here: " + offer.deeplink
       })
     })
   } else {
