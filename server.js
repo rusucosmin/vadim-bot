@@ -24,14 +24,14 @@ offers = {
     type: "big pizza",
     price: "very cheap, bug high quality",
     message: "You should try our pizza, best pizza in town. Only today at a great deal 50% off on two ordered",
-    deeplink: "https://nameless-basin-57929.herokuapp.com/parties/3521"
+    deeplink: "https://nameless-basin-57929.herokuapp.com/party/3521"
   }, "loomni": {
     ref: "loomni",
     offer: "buritto",
     type: "buritto with every ingredient you can ever think",
     price: "very cheap, bug high quality",
     message: "There is nothing more that should be said.",
-    deeplink: "https://nameless-basin-57929.herokuapp.com/parties/352"
+    deeplink: "https://nameless-basin-57929.herokuapp.com/party/352"
   }
 }
 
