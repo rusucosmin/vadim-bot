@@ -1,6 +1,7 @@
 var express = require("express");
 var request = require("request");
 var bodyParser = require("body-parser");
+var url = require('url');
 var fs = require('fs');
 
 var quotes = fs.readFileSync('vadim.txt', 'utf8').split("\n");
@@ -92,6 +93,13 @@ app.post("/webhook", function(req, res) {
   }
 });
 
+function getFullUrl(relativeUrl) {
+  var fullUrl = url.resolve('https://fast-bayou-81426.herokuapp.com', relativeUrl)
+  console.log("getFullUrl( " + relativeUrl + ")")
+  console.log(fullUrl)
+  return fullUrl
+}
+
 function processReferral(event) {
   console.log("processReferral");
   console.log(event)
@@ -101,12 +109,24 @@ function processReferral(event) {
     sendMessage(senderId, {text: "Hi there, it looks like you are at <" + event.referral.ref + ">!"})
     sendMessage(senderId, {text: "Here are our offers today:"})
     request({
-      url: "/offers?ref=" + event.referral.ref,
+      url: getFullUrl("/offers?ref=" + event.referral.ref.toString()),
       method: "GET"
     }, function(err, response, body) {
-      console.log(body.toString())
-      console.log(err.toString())
-      console.log(response.toString())
+      if(body) {
+        console.log(body.toString())
+      } else {
+        console.log("body undefined")
+      }
+      if(err) {
+        console.log(err.toString())
+      } else {
+        console.log("err undefined")
+      }
+      if(response) {
+        console.log(response.toString())
+      } else {
+        console.log("response undefined")
+      }
       var offer = JSON.parse(body)
       sendMessage(senderId, {
         text: "Our offer today is:\n"
