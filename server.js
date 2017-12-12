@@ -104,6 +104,9 @@ function processReferral(event) {
       url: "/offers?ref=" + event.referral.ref,
       method: "GET"
     }, function(err, response, body) {
+      console.log(body.toString())
+      console.log(err.toString())
+      console.log(response.toString())
       var offer = JSON.parse(body)
       sendMessage(senderId, {
         text: "Our offer today is:\n"
